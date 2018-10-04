@@ -1,0 +1,39 @@
+{
+  "name": "social-hub-node",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "csv-loader": "^3.0.2",
+    "gulp-babel": "^8.0.0",
+    "json-loader": "^0.5.7",
+    "nodemon": "^1.18.4",
+    "papaparse": "^4.5.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "express": "^4.16.3",
+    "lodash": "^4.17.10",
+    "node-fetch": "^2.2.0",
+    "twitter": "^1.7.1"
+  }
+}
