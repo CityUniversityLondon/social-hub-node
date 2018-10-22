@@ -33,6 +33,7 @@
     "async": "^2.6.1",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
+    "node-cron": "^2.0.1",
     "node-fetch": "^2.2.0",
     "twitter": "^1.7.1"
   }
