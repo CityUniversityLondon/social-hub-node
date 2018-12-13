@@ -2,12 +2,12 @@ const get = require('../../methods/getMethods');
 
 module.exports = (req, res) => {
 
-    const modelId = req.query.itemRef;
+    const modelId = req.query.screenName;
     var model = null;
     if (modelId) {
-        model = get.getJsonById(modelId);
+        model = get.getTwitterSN(modelId);
     } else {
-        model = get.getJson();
+        model = get.getTwitter();
     }
 
     res.status(200).json(model);

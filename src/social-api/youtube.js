@@ -1,7 +1,8 @@
 var fs = require('fs');
 var fetch = require('node-fetch');
 var accounts = require('../../accounts/accounts.json');
-var calDate = require('./calDate');
+var calDate = require('../methods/calDate');
+var moment = require('moment');
 
 let twomonthTS = new Date();
 twomonthTS.setMonth(twomonthTS.getMonth() - 2);
@@ -24,7 +25,7 @@ function getData(account) {
 						'text' : e.snippet.title,
 						'linkedText' : e.snippet.title,
 						'accountUrl' : 'https:\/\/www.youtube.com\/channel\/' + e.snippet.channelId,
-						'timeElapsed' : calDate.daysAgo(e.snippet.publishedAt) + ' days ago',
+						'timeElapsed' : moment(e.snippet.publishedAt).fromNow(),
 						'itemUrl' : e.contentDetails.upload.videoId,
 						'imageUrl' : e.snippet.thumbnails.default.url,
 						'videoId' : e.contentDetails.upload.videoId

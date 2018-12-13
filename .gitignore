@@ -1,2 +1,4 @@
 # NPM
 node_modules/
+#Ignore social api tokens
+accounts.json

@@ -1,10 +1,6 @@
 const routes = require('express').Router();
 const date = require('./date');
 
-routes.get('/', (req, res) => {
-  res.status(200).json({ message: 'Connected!' });
-});
-
-routes.use('/date', date);
+routes.use('/', date);
 
 module.exports = routes;
