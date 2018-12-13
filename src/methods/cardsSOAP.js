@@ -18,13 +18,13 @@ twSocialCards.forEach(e => {
     ar.push(e);
 })
 
-var cassofficial = sl.find(function(e){
+var cassofficial = sl.find(function(e) {
     return e.type === 'Facebook' && e.screenName === 'Cassofficial'
 });
 
 cassofficial.itemRef = 'fb-Cassofficial';
 
-var cassbusinessschool = sl.find(function(e){
+var cassbusinessschool = sl.find(function(e) {
     return e.type === 'Instagram' && e.screenName === 'cassbusinessschool'
 });
 
@@ -62,16 +62,15 @@ let sEnvelop =
 //     }
 // })();
 
-async function sendSocialCards(){
-    try{
+async function sendSocialCards() {
+    try {
         const { response } = await soapRequest(url, headers, sEnvelop);
         const { body, statusCode } = response;
         return {
             'body': body,
             'statusCode': statusCode
         }
-    }
-    catch(e){
+    } catch (e) {
         return e
     }
 }

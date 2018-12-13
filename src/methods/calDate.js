@@ -1,13 +1,13 @@
-exports.daysAgo = function(apiDate){
+exports.daysAgo = function(apiDate) {
     let curDate = new Date();
-    let oneDay = 24*60*60*1000;
+    let oneDay = 24 * 60 * 60 * 1000;
     let date = new Date(apiDate);
-    let diffDays = Math.round(Math.abs((date.getTime() - curDate.getTime())/(oneDay)));
+    let diffDays = Math.round(Math.abs((date.getTime() - curDate.getTime()) / (oneDay)));
 
     return diffDays
 }
 
-exports.formatDate = function(apiDate){
+exports.formatDate = function(apiDate) {
     let date = new Date(apiDate);
     let year = date.getFullYear();
     let month = date.getMonth();
