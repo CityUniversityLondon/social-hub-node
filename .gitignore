@@ -2,3 +2,4 @@
 node_modules/
 #Ignore social api tokens
 accounts/
+not_using/
