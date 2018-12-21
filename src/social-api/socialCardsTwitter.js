@@ -14,7 +14,7 @@ var client2 = new Twitter({
 
 function getTwitter(a) {
     return new Promise(function(resolve, reject) {
-        var params = { screen_name: a.account, count: 1 };
+        var params = { screen_name: a.account, count: 1, result_type: 'recent' };
 
         client2.get('statuses/user_timeline', params, function(error, tweets, response) {
             var j = null;
@@ -29,7 +29,7 @@ function getTwitter(a) {
                 'fullName': tweets[0].user.name,
                 'screenName': tweets[0].user.screen_name,
                 'text': tweets[0].text,
-                'linkedText': escape(tweets[0].text.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://twitter.com/hashtag/$2?src=hash\">#$2</a>').replace(/(^|\B)@(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://twitter.com/$2\">@$2</a>')),
+                'linkedText': tweets[0].text,
                 'accountUrl': 'http:\/\/twitter.com\/' + tweets[0].user.screen_name,
                 'timeElapsed': moment(new Date(tweets[0].created_at)).fromNow(),
                 'itemUrl': 'https://twitter.com/' + tweets[0].user.screen_name + '/status/' + tweets[0].id_str,

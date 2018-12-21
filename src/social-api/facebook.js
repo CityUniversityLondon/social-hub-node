@@ -31,9 +31,9 @@ function getData(account) {
                         text = e.description
                     }
                     return {
-                        'itemRef': calDate.formatDate(e.created_time),
+                        'itemRef': moment(e.created_time, 'X').format('YYYYMMDD'),
                         'postId': null,
-                        'timeCreated': Math.round((new Date(e.created_time)).getTime() / 1000),
+                        'timeCreated': e.created_time,
                         'type': 'Facebook',
                         'fullName': e.from.name,
                         'screenName': account.accountname,

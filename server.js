@@ -26,7 +26,7 @@ app.listen(3002, () => {
     console.log('App listening on port 3002');
 });
 
-cron.schedule('1 9 * * *', function() {
+cron.schedule('1 */2 * * *', function() {
     Promise.all(youtube.youtubeAccounts).then(r => {
         fs.writeFile('./json/youtube.json', JSON.stringify([].concat(...r)), 'utf-8', function(err) {
             if (err) throw err;
@@ -36,7 +36,7 @@ cron.schedule('1 9 * * *', function() {
 
 });
 
-cron.schedule('1 9 * * *', function() {
+cron.schedule('1 */2 * * *', function() {
     Promise.all(facebook.facebookAccounts).then(r => {
             fs.writeFile('./json/facebook.json', JSON.stringify([].concat(...r)), 'utf-8', function(err) {
                 if (err) throw err;
@@ -49,7 +49,7 @@ cron.schedule('1 9 * * *', function() {
 
 });
 
-cron.schedule('1 9 * * *', function() {
+cron.schedule('1 */2 * * *', function() {
     Promise.all(inst.instAccounts).then(r => {
         var f = r.filter(o => { return o.code !== 400 });
         fs.writeFile('./json/instagram.json', JSON.stringify([].concat(...f)), 'utf-8', function(err) {
@@ -60,17 +60,17 @@ cron.schedule('1 9 * * *', function() {
 
 });
 
-cron.schedule('1 9 * * *', function() {
+cron.schedule('1 */2 * * *', function() {
     twitter.getTwitter();
 
 });
 
-cron.schedule('2 9 * * *', function() {
+cron.schedule('2 */2 * * *', function() {
     saveJson.saveJson().then(r =>
         console.log(r));
 });
 
-cron.schedule('3 9 * * *', function() {
+cron.schedule('3 */2 * * *', function() {
     var t = JSON.parse(fs.readFileSync('./json/all.json', 'utf8'));
     var st = t.filter(e => e.type === 'Twitter');
 
@@ -81,7 +81,7 @@ cron.schedule('3 9 * * *', function() {
 
 });
 
-cron.schedule('57 9 * * *', function() {
+cron.schedule('4 */2 * * *', function() {
     Promise.all(twSocialCards.socialCards).then(r => {
         fs.writeFile('./json/twitterSocialCards.json', JSON.stringify(r), 'utf-8', function(err) {
             if (err) throw err;
@@ -91,7 +91,7 @@ cron.schedule('57 9 * * *', function() {
 
 });
 
-cron.schedule('41 11 * * *', function() {
+cron.schedule('5 */2 * * *', function() {
     sendSocialCards.sendSocialCards().then(r =>
         console.log(r));
 });
