@@ -21,7 +21,8 @@ node server.js
 ```
 
 ### Adding new social account or updating a token
-If a token has expire or a new twitter account needs to be added this can be done in the accounts/accounts.json
+If a token has expire or a new twitter account needs to be added this can be done in the accounts/accounts.json.
+The file is located on the server because the Git repo is currently public 
 ```
 just add a new node to either social accounts
 "accounts":{
@@ -47,7 +48,7 @@ the password is made up with the username and password decode to base64 there ar
 server.js uses express to handle API request
 the project uses cron to handle time schedule to execute scoial api requests and push SOAP requests to Squiz matrix
 CRON schedule is setup to run every hour.
-The index.js file is used to handle the application end points
+The index file in /src/routes/index.js handle request endpoints 
 
 # on the server
 ## Folder structure

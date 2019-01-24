@@ -3,12 +3,12 @@ const get = require('../../methods/getMethods');
 module.exports = (req, res) => {
 
     const modelId = req.query.itemRef;
-    var model = null;
+
     if (modelId) {
-        model = get.getJsonById(modelId);
+        get.getJsonById(modelId).then(r => res.status(200).json(r));
     } else {
-        model = get.getJson();
+        get.getJson().then(r => res.status(200).json(r));
     }
 
-    res.status(200).json(model);
+    
 };
