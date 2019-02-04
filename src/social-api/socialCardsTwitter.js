@@ -2,6 +2,7 @@ var Twitter = require('twitter');
 var fs = require('fs');
 var async = require("async");
 var moment = require('moment');
+var async = require("async");
 var accounts = require('../../accounts/accounts.json');
 var calDate = require('../methods/calDate');
 
@@ -12,7 +13,7 @@ var client2 = new Twitter({
     access_token_secret: accounts.twittercredentials.credential2.accessTokenSecret
 });
 
-function getTwitter(a) {
+/*function getTwitter(a) {
     return new Promise(function(resolve, reject) {
         var params = { screen_name: a.account, count: 1, result_type: 'recent' };
 
@@ -44,4 +45,42 @@ exports.socialCards = accounts.accounts.twitterSocialCards.map(a => {
     return getTwitter(a).then(j => {
         return j
     })
-})
+})*/
+
+exports.socialCards = function() {
+    var json = [];
+
+    async.forEachOf(accounts.accounts.twitterSocialCards, (a, key, callback) => {
+        var params = { screen_name: a.account, count: 1, result_type: 'recent' };
+
+        client2.get('statuses/user_timeline', params, function(error, tweets, response) {
+            var j = null;
+            if (tweets[0].entities.media !== undefined) {
+                j = tweets[0].entities.media[0].media_url
+            }
+            var t = {
+                'itemRef': 'tw-' + tweets[0].user.screen_name,
+                'postId': tweets[0].id,
+                'timeCreated': Math.round((new Date(tweets[0].created_at)).getTime() / 1000),
+                'type': 'Twitter',
+                'fullName': tweets[0].user.name,
+                'screenName': tweets[0].user.screen_name,
+                'text': tweets[0].text,
+                'linkedText': tweets[0].text,
+                'accountUrl': 'http:\/\/twitter.com\/' + tweets[0].user.screen_name,
+                'timeElapsed': moment(new Date(tweets[0].created_at)).fromNow(),
+                'itemUrl': 'https://twitter.com/' + tweets[0].user.screen_name + '/status/' + tweets[0].id_str,
+                'imageUrl': j,
+                'videoId': null
+            }
+            json.push(t);
+            callback();
+        });
+    }, err => {
+        if (err) console.log(err.message);
+        fs.writeFile('./json/twitterSocialCards.json', JSON.stringify(json), 'utf-8', function(err) {
+            if (err) throw err;
+            console.log('Twitter social cards Saved!');
+        });
+    });
+}

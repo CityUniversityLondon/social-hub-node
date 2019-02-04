@@ -6,7 +6,7 @@ exports.getJson = async function() {
     return all.slice(0, 20);*/
 
     var promise = new Promise((resolve, reject) => {
-        var c = fs.readFile('./json/all.json', 'utf8', function(e, content){
+        var c = fs.readFile('./json/all.json', 'utf8', function(e, content) {
             resolve(JSON.parse(content).slice(0, 20));
         });
     });
@@ -31,8 +31,8 @@ exports.getJsonById = async function(id) {
 
         return al.slice(index, e)
     }*/
-    var promise = new Promise((resolve,reject) => {
-        var c = fs.readFile('./json/all.json', 'utf8', function(e, content){
+    var promise = new Promise((resolve, reject) => {
+        var c = fs.readFile('./json/all.json', 'utf8', function(e, content) {
             let json = JSON.parse(content);
             var index = json.findIndex((e) => {
                 return e.itemRef === id
@@ -46,7 +46,7 @@ exports.getJsonById = async function(id) {
                 var e = index + 20;
 
                 resolve(json.slice(index, e));
-            } 
+            }
         });
     });
 
@@ -56,14 +56,48 @@ exports.getJsonById = async function(id) {
 
 }
 
-exports.getTwitter = function() {
-    var tw = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
-    return tw.slice(0, 20);
+exports.getTwitter = async function() {
+    /*var tw = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
+    return tw.slice(0, 20);*/
+
+    var promise = new Promise((resolve, reject) => {
+        var c = fs.readFile('./json/twitterID.json', 'utf8', function(e, content) {
+            resolve(JSON.parse(content).slice(0, 20));
+        });
+    });
+
+    var results = await promise;
+
+    return results;
 }
 
-exports.getTwitterSN = function(sName) {
-    var t = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
+exports.getTwitterSN = async function(sName) {
+    /*var t = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
     var sn = t.filter(e => e.screenName === sName);
 
-    return sn.slice(0, 20);
+    return sn.slice(0, 20);*/
+
+    var promise = new Promise((resolve, reject) => {
+        var t = fs.readFile('./json/twitterID.json', 'utf8', function(e, content) {
+            var pj = JSON.parse(content);
+            var f = pj.filter(e => e.screenName === sName);
+            resolve(f.slice(0, 20));
+        });
+    });
+
+    var results = await promise;
+
+    return results;
+}
+
+exports.getTwitterHT = function(hashTag) {
+    var t = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
+    let n = t.filter(e => {
+        if (e.hashTags.find(t => t.text === hashTag)) {
+            return e;
+        }
+        return
+    });
+
+    return n;
 }

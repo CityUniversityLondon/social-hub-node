@@ -5,9 +5,9 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var memwatch = require('memwatch-next');
 
-var inst = require('./src/social-api/instagram');
-var youtube = require('./src/social-api/youtube');
-var facebook = require('./src/social-api/facebook');
+var inst = require('./src/social-api/insta');
+var youtube = require('./src/social-api/yt');
+var facebook = require('./src/social-api/fb');
 var twitter = require('./src/social-api/twitterApi');
 var twSocialCards = require('./src/social-api/socialCardsTwitter');
 var ch = require('./src/methods/changeID');
@@ -35,51 +35,28 @@ memwatch.on('leak', (info) => {
     })
 });
 
-cron.schedule('1 */2 * * *', function() {
-    Promise.all(youtube.youtubeAccounts).then(r => {
-        fs.writeFile('./json/youtube.json', JSON.stringify([].concat(...r)), 'utf-8', function(err) {
-            if (err) throw err;
-            console.log('Youtube json Saved!');
-        });
-    });
-
+cron.schedule('1 */1 * * *', function() {
+    youtube.getYt();
 });
 
-cron.schedule('1 */2 * * *', function() {
-    Promise.all(facebook.facebookAccounts).then(r => {
-            fs.writeFile('./json/facebook.json', JSON.stringify([].concat(...r)), 'utf-8', function(err) {
-                if (err) throw err;
-                console.log('facebook json Saved!');
-            });
-        })
-        .catch((er) => {
-            console.log(er);
-        });
-
+cron.schedule('1 */1 * * *', function() {
+    facebook.getFacebook();
 });
 
-cron.schedule('1 */2 * * *', function() {
-    Promise.all(inst.instAccounts).then(r => {
-        var f = r.filter(o => { return o.code !== 400 });
-        fs.writeFile('./json/instagram.json', JSON.stringify([].concat(...f)), 'utf-8', function(err) {
-            if (err) throw err;
-            console.log('instagram json Saved!');
-        });
-    });
-
+cron.schedule('1 */1 * * *', function() {
+    inst.getInsta();
 });
 
-cron.schedule('1 */2 * * *', function() {
+cron.schedule('1 */1 * * *', function() {
     twitter.getTwitter();
-
 });
 
-cron.schedule('2 */2 * * *', function() {
+cron.schedule('2 */1 * * *', function() {
     saveJson.saveJson().then(r =>
         console.log(r));
 });
 
-cron.schedule('3 */2 * * *', function() {
+cron.schedule('3 */1 * * *', function() {
     var t = JSON.parse(fs.readFileSync('./json/all.json', 'utf8'));
     var st = t.filter(e => e.type === 'Twitter');
 
@@ -90,17 +67,11 @@ cron.schedule('3 */2 * * *', function() {
 
 });
 
-cron.schedule('4 */2 * * *', function() {
-    Promise.all(twSocialCards.socialCards).then(r => {
-        fs.writeFile('./json/twitterSocialCards.json', JSON.stringify(r), 'utf-8', function(err) {
-            if (err) throw err;
-            console.log('Twitter social cards Saved!');
-        });
-    });
-
+cron.schedule('4 */1 * * *', function() {
+    twSocialCards.socialCards();
 });
 
-cron.schedule('*/5 * * * *', function() {
+cron.schedule('5 */1 * * *', function() {
     sendSocialCards.sendSocialCards().then(r =>
         console.log(r));
 });

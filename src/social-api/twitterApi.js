@@ -19,18 +19,17 @@ var client2 = new Twitter({
     access_token_secret: accounts.twittercredentials.credential2.accessTokenSecret
 });
 
-var jsonTwitter = [];
-var jsonSocialCards = [];
-var counter = 0;
+
 
 exports.getTwitter = function() {
+    var jsonTwitter = [];
+
     async.forEachOf(accounts.accounts.twitter, (value, key, callback) => {
 
         if (value.credential === 1) {
             var params = { screen_name: value.account, count: 10 };
             client.get('statuses/user_timeline', params, function(error, tweets, response) {
                 if (!error) {
-                    var tarray = [];
 
                     tweets.forEach(e => {
                         var j = null
@@ -52,16 +51,12 @@ exports.getTwitter = function() {
                             'timeElapsed': moment(new Date(e.created_at)).fromNow(),
                             'itemUrl': 'https://twitter.com/' + e.user.screen_name + '/status/' + e.id_str,
                             'imageUrl': j,
-                            'videoId': null
+                            'videoId': null,
+                            'hashTags': e.entities.hashtags
                         }
                         jsonTwitter.push(getT);
 
                     });
-
-
-
-                    counter++;
-
                 }
                 callback();
             });
@@ -77,7 +72,6 @@ exports.getTwitter = function() {
                             j = e.entities.media[0].media_url
                         }
 
-
                         var getT = {
                             'itemRef': calDate.formatDate(e.created_at),
                             'postId': e.id,
@@ -91,15 +85,12 @@ exports.getTwitter = function() {
                             'timeElapsed': moment(new Date(e.created_at)).fromNow(),
                             'itemUrl': 'https://twitter.com/' + e.user.screen_name + '/status/' + e.id_str,
                             'imageUrl': j,
-                            'videoId': null
+                            'videoId': null,
+                            'hashTags': e.entities.hashtags
                         }
                         jsonTwitter.push(getT);
 
                     });
-
-
-                    counter++;
-
                 }
                 callback();
             });
