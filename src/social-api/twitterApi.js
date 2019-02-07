@@ -1,9 +1,10 @@
 var Twitter = require('twitter');
 var fs = require('fs');
-var accounts = require('../../accounts/accounts.json');
-var async = require("async");
-var calDate = require('../methods/calDate');
 var moment = require('moment');
+var async = require("async");
+var accounts = require('../../accounts/accounts.json');
+var calDate = require('../methods/calDate');
+
 
 var client = new Twitter({
     consumer_key: accounts.twittercredentials.credential1.consumerKey,
