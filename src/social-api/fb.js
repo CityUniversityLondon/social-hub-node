@@ -51,6 +51,9 @@ exports.getFacebook = function() {
                 });
 
                 callback();
+            })
+            .catch(err => {
+                throw new Error(err);
             });
     }, err => {
         if (err) console.error(err.message);

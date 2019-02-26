@@ -35,6 +35,9 @@ exports.getYt = function() {
                     ytJson.push(a);
                 });
                 callback();
+            })
+            .catch(err => {
+                throw new Error(err);
             });
     }, err => {
         if (err) console.error(err.message);

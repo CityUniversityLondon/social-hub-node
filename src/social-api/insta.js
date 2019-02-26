@@ -44,6 +44,9 @@ exports.getInsta = function() {
                 } else {
                     callback(account.account + ' :' + json.meta.error_message);
                 }
+            })
+            .catch(err => {
+                throw new Error(err);
             });
     }, err => {
         if (err) console.error(err.message);

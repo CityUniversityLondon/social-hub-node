@@ -28,7 +28,7 @@ exports.getTwitter = function() {
     async.forEachOf(accounts.accounts.twitter, (value, key, callback) => {
 
         if (value.credential === 1) {
-            var params = { screen_name: value.account, count: 10 };
+            var params = { screen_name: value.account, count: 10, include_rts: false };
             client.get('statuses/user_timeline', params, function(error, tweets, response) {
                 if (!error) {
 
@@ -62,7 +62,7 @@ exports.getTwitter = function() {
                 callback();
             });
         } else {
-            var params = { screen_name: value.account, count: 10 };
+            var params = { screen_name: value.account, count: 10, include_rts: false };
             client2.get('statuses/user_timeline', params, function(error, tweets, response) {
                 if (!error) {
 
