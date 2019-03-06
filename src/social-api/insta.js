@@ -42,11 +42,11 @@ exports.getInsta = function() {
                     });
                     callback();
                 } else {
-                    callback(account.account + ' :' + json.meta.error_message);
+                    //console log instaed of throwing an error as 
+                    //it will not carry on fetching
+                    console.log(account.account + ' :' + json.meta.error_message);
+                    return callback();
                 }
-            })
-            .catch(err => {
-                throw new Error(err);
             });
     }, err => {
         if (err) console.error(err.message);

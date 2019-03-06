@@ -29,10 +29,6 @@ async function sendSocialCards() {
     let sl = JSON.parse(xml);
     let ar = [];
 
-    fs.writeFile('./json/all2.json', JSON.stringify(sl), 'utf-8', function(err) {
-        if (err) throw err;
-        console.log('all 2 Saved!');
-    });
 
     let twSocialCards = fs.readFileSync('./json/twitterSocialCards.json', 'utf-8');
     let prTw = JSON.parse(twSocialCards);

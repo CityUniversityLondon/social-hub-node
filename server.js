@@ -3,7 +3,7 @@ var express = require('express');
 var cron = require('node-cron');
 var fs = require('fs');
 var bodyParser = require('body-parser');
-var memwatch = require('memwatch-next');
+/*var memwatch = require('memwatch-next');*/
 
 var inst = require('./src/social-api/insta');
 var youtube = require('./src/social-api/yt');
@@ -23,17 +23,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', routes);
 
-app.listen(3002, () => {
-    console.log('App listening on port 3002');
+app.listen(3000, () => {
+    console.log('App listening on port 3000');
 });
 
-memwatch.on('leak', (info) => {
+/*memwatch.on('leak', (info) => {
     console.error('Memory leak detected:\n', info);
     fs.writeFile('./error.txt', JSON.stringify(info), 'utf', function(e) {
         if (err) throw err;
         console.log('error');
     })
-});
+});*/
 
 cron.schedule('1 */1 * * *', function() {
     youtube.getYt();
