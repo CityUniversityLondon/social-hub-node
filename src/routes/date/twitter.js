@@ -7,18 +7,18 @@ module.exports = (req, res) => {
     const hashTag = req.query.hashTag;
     var model = null;
 
-    if (modelId !== undefined || hashTag !== undefined) {
-        if (modelId) {
-            get.getTwitterSN(modelId).then(r => {
-                res.status(200).json(r);
-            });
 
-        } else {
-            model = t.twitter(hashTag).then(r => {
-                res.status(200).json(r);
-            });
-        }
-    } else {
+    if (modelId) {
+        get.getTwitterSN(modelId).then(r => {
+            res.status(200).json(r);
+        });
+
+    } else if (hashTag){
+        model = t.twitter(hashTag).then(r => {
+            res.status(200).json(r);
+        });
+    }
+     else {
         get.getTwitter().then(r => res.status(200).json(r));
     }
 };

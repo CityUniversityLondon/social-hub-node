@@ -15,7 +15,7 @@ exports.twitter = async function(query) {
             access_token_secret: accounts.twittercredentials.credential2.accessTokenSecret
         });
 
-        var results = client2.get('search/tweets', { q: query }, function(error, tweets, response) {
+        var results = client2.get('search/tweets', { q: query, count: 4 }, function(error, tweets, response) {
 
             resolve(tweets.statuses.map(function(e) {
                 var j = null
@@ -36,6 +36,7 @@ exports.twitter = async function(query) {
                     'itemUrl': 'https://twitter.com/' + e.user.screen_name + '/status/' + e.id_str,
                     'imageUrl': j,
                     'videoId': null,
+                    'profileImage' : e.user.profile_image_url_https,
                     'hashTags': e.entities.hashtags
                 }
             }));
