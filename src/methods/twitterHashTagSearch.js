@@ -3,7 +3,7 @@ const fs = require('fs');
 var moment = require('moment');
 var accounts = require('../../accounts/accounts.json');
 var calDate = require('./calDate');
-
+var {twitterTextFormatter} = require('./textFormat');
 
 exports.twitter = async function(query) {
 
@@ -30,7 +30,7 @@ exports.twitter = async function(query) {
                     'fullName': e.user.name,
                     'screenName': e.user.screen_name,
                     'text': e.text,
-                    'linkedText': e.text.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://twitter.com/hashtag/$2?src=hash\">#$2</a>').replace(/(^|\B)@(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://twitter.com/$2\">@$2</a>'),
+                    'linkedText': twitterTextFormatter(e.text),
                     'accountUrl': 'http:\/\/twitter.com\/' + e.user.screen_name,
                     'timeElapsed': moment(new Date(e.created_at)).fromNow(),
                     'itemUrl': 'https://twitter.com/' + e.user.screen_name + '/status/' + e.id_str,
