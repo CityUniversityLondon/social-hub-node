@@ -6,7 +6,8 @@ var moment = require('moment');
 var async = require("async");
 var accounts = require('../../accounts/accounts.json');
 var calDate = require('../methods/calDate');
-
+var {instaHashTag} = require('../methods/textFormat');
+/*test*/
 exports.getInsta = function() {
 
     var instaJson = [];
@@ -31,7 +32,7 @@ exports.getInsta = function() {
                             "fullName": e.user.full_name,
                             "screenName": e.user.username,
                             "text": e.caption.text,
-                            "linkedText": e.caption.text.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://instagram.com/$2\">@$2</a>'),
+                            "linkedText": instaHashTag(e.caption.text),
                             "accountUrl": "https:\/\/instagram.com\/" + e.user.username,
                             "timeElapsed": moment(e.created_time * 1000).fromNow(),
                             "itemUrl": e.link,

@@ -1,7 +1,7 @@
 {
-    "script": "server.js",
+    "script": "./server.js",
     "watch": true,
-    "ignore_watch": ["json"],
+    "ignore_watch": ["./json"],
     "watch_options": {
         "followSymlinks": false
     },

@@ -51,7 +51,7 @@ exports.socialCards = function() {
     var json = [];
 
     async.forEachOf(accounts.accounts.twitterSocialCards, (a, key, callback) => {
-        var params = { screen_name: a.account, count: 1, result_type: 'recent' };
+        var params = { screen_name: a.account, count: 1, result_type: 'recent', include_rts: false };
 
         client2.get('statuses/user_timeline', params, function(error, tweets, response) {
             var j = null;

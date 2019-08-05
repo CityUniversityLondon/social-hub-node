@@ -10,7 +10,6 @@ var youtube = require('./src/social-api/yt');
 var facebook = require('./src/social-api/fb');
 var twitter = require('./src/social-api/twitterApi');
 var twSocialCards = require('./src/social-api/socialCardsTwitter');
-var ch = require('./src/methods/changeID');
 var sendSocialCards = require('./src/methods/cardsSOAP');
 var saveJson = require('./src/methods/saveJSON');
 
