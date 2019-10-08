@@ -5,6 +5,7 @@ var moment = require('moment');
 var async = require("async");
 var accounts = require('../../accounts/accounts.json');
 var calDate = require('../methods/calDate');
+var {twitterTextFormatter} = require('../methods/textFormat');
 
 var client2 = new Twitter({
     consumer_key: accounts.twittercredentials.credential2.consumerKey,
@@ -65,8 +66,8 @@ exports.socialCards = function() {
                 'type': 'Twitter',
                 'fullName': tweets[0].user.name,
                 'screenName': tweets[0].user.screen_name,
-                'text': tweets[0].text,
-                'linkedText': tweets[0].text,
+                'text': encodeURI(tweets[0].text),
+                'linkedText': encodeURI(twitterTextFormatter(tweets[0].text)),
                 'accountUrl': 'http:\/\/twitter.com\/' + tweets[0].user.screen_name,
                 'timeElapsed': moment(new Date(tweets[0].created_at)).fromNow(),
                 'itemUrl': 'https://twitter.com/' + tweets[0].user.screen_name + '/status/' + tweets[0].id_str,

@@ -41,6 +41,27 @@ async function sendSocialCards() {
         return e.type === 'Facebook' && e.screenName === 'Cassofficial'
     });
 
+    if(cassofficial !== undefined){
+         cassofficial.itemRef = 'fb-Cassofficial';
+    }else{
+        //place holder data because cassofficial facebook account token expired contact owner to renew token
+        cassofficial = {
+            "itemRef": "fb-Cassofficial",
+            "postId": null,
+            "timeCreated": 1567533726,
+            "type": "Facebook",
+            "fullName": "Cass Business School",
+            "screenName": "Cassofficial",
+            "text": "Would you like to experience the life of a Cass MBA student in London? Join us on campus on Saturday 14th September for our 'MBA in a day' event. https://bit.ly/2lCcHFB",
+            "linkedText": "Would you like to experience the life of a Cass MBA student in London? Join us on campus on Saturday 14th September for our 'MBA in a day' event. https://bit.ly/2lCcHFB",
+            "accountUrl": "http://www.facebook.com/226717388297",
+            "timeElapsed": "a day ago",
+            "itemUrl": "https://www.facebook.com/226717388297/posts/10158997659783298",
+            "imageUrl": "https://external.xx.fbcdn.net/safe_image.php?d=AQDN5z7yxz36Pbw0&url=https%3A%2F%2Fwww.facebook.com%2Fads%2Fimage%2F%3Fd%3DAQLoh9ZJOJKm5LWtUjnjLFJWmaTz2TUGHxkIOAzqXz3KteNso61dyg8__hLhe1T3fiqwCLw7uLl63adUErU5WXfTG-efHts_A6qfU0r3KWWfMqEZveD692sg3nVN8FG1Im_-SK3oNV8LSOeoEEyMQIgO&_nc_hash=AQCQWMMh9UmGUc7r",
+            "videoId": null
+            };
+    }
+
     cassofficial.itemRef = 'fb-Cassofficial';
 
     var cassbusinessschool = sl.find(function(e) {

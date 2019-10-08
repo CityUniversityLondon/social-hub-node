@@ -24,6 +24,7 @@ exports.getInsta = function() {
             .then(json => {
                 if (json.data) {
                     json.data.forEach(function(e) {
+                        let txt = e.caption && e.caption.text;
                         var a = {
                             "itemRef": calDate.formatDate(e.created_time * 1000),
                             "postId": null,
@@ -31,12 +32,12 @@ exports.getInsta = function() {
                             "type": "Instagram",
                             "fullName": e.user.full_name,
                             "screenName": e.user.username,
-                            "text": e.caption.text,
-                            "linkedText": instaHashTag(e.caption.text),
+                            "text": txt,
+                            "linkedText": txt ? instaHashTag(txt) : null,
                             "accountUrl": "https:\/\/instagram.com\/" + e.user.username,
                             "timeElapsed": moment(e.created_time * 1000).fromNow(),
                             "itemUrl": e.link,
-                            "imageUrl": e.images.standard_resolution.url,
+                            "imageUrl": e.link + 'media/?size=m',
                             "videoId": null
                         }
                         instaJson.push(a);

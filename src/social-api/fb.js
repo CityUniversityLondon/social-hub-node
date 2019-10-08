@@ -11,7 +11,7 @@ exports.getFacebook = function() {
     onemonthTS.setMonth(onemonthTS.getMonth() - 1);
     onemonthTS = Math.round(onemonthTS.getTime() / 1000);
 
-    const fields = 'id,message,link,name,description,type,created_time,from,object_id,full_picture';
+    const fields = 'id,message,created_time,from,full_picture';
 
     var jsonFb = [];
 
@@ -22,33 +22,33 @@ exports.getFacebook = function() {
             })
             .then(function(json) {
                 if (json.error) {
-                    throw new Error(json.error.message);
+                    console.log(json.error.message);
                 }
-                json.data.forEach(e => {
-                    let postsId = e.id.replace(e.from.id + '_', '');
-                    var text = null;
-                    if (e.message) {
-                        text = e.message;
-                    } else if (e.description) {
-                        text = e.description
-                    }
-                    var a = {
-                        'itemRef': moment(e.created_time, 'X').format('YYYYMMDD'),
-                        'postId': null,
-                        'timeCreated': e.created_time,
-                        'type': 'Facebook',
-                        'fullName': e.from.name,
-                        'screenName': account.accountname,
-                        'text': text,
-                        'linkedText': text,
-                        'accountUrl': 'http:\/\/www.facebook.com\/' + account.account,
-                        'timeElapsed': moment(e.created_time * 1000).fromNow(),
-                        'itemUrl': 'https://www.facebook.com/' + e.from.id + '/posts/' + postsId,
-                        'imageUrl': e.full_picture,
-                        'videoId': null
-                    }
-                    jsonFb.push(a);
-                });
+                else{
+                    json.data.forEach(e => {
+                        let postsId = e.id.replace(e.from.id + '_', '');
+                        var text = null;
+                        if (e.message) {
+                            text = e.message;
+                        }
+                        var a = {
+                            'itemRef': moment(e.created_time, 'X').format('YYYYMMDD'),
+                            'postId': null,
+                            'timeCreated': e.created_time,
+                            'type': 'Facebook',
+                            'fullName': e.from.name,
+                            'screenName': account.accountname,
+                            'text': text,
+                            'linkedText': text,
+                            'accountUrl': 'http:\/\/www.facebook.com\/' + account.account,
+                            'timeElapsed': moment(e.created_time * 1000).fromNow(),
+                            'itemUrl': 'https://www.facebook.com/' + e.from.id + '/posts/' + postsId,
+                            'imageUrl': e.full_picture,
+                            'videoId': null
+                        }
+                        jsonFb.push(a);
+                    });
+                }
 
                 callback();
             })
