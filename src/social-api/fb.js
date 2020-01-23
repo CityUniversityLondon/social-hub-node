@@ -4,6 +4,7 @@ var moment = require('moment');
 var async = require("async");
 var accounts = require('../../accounts/accounts.json');
 var calDate = require('../methods/calDate');
+var {facebookTextFormatter} = require('../methods/textFormat');
 
 exports.getFacebook = function() {
     let ts = Math.round((new Date()).getTime() / 1000);

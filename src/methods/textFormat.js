@@ -16,6 +16,10 @@ const instaHashTag = function(string){
 	return string.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://instagram.com/$2\">@$2</a>')
 }
 
+const fbHashTag = function(string){
+	return string.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://facebook.com/hashtag/$2?fref=mentions\">#$2</a>')
+}
+
 const escape = function(string){
 	return string
 		.replace(/[\"]/g, '\\"')
@@ -34,9 +38,15 @@ const twitterTextFormatter = compose(
 	linksToHTMLLink,
 	);
 
+const facebookTextFormatter = compose(
+	fbHashTag,
+	linksToHTMLLink,
+	);
+
 module.exports = {
 	twitterTextFormatter: twitterTextFormatter,
-	instaHashTag: instaHashTag
+	instaHashTag: instaHashTag,
+	facebookTextFormatter: facebookTextFormatter
 }
 
 /*exports.twitterTextFormat = function(string){

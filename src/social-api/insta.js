@@ -37,7 +37,7 @@ exports.getInsta = function() {
                             "accountUrl": "https:\/\/instagram.com\/" + e.user.username,
                             "timeElapsed": moment(e.created_time * 1000).fromNow(),
                             "itemUrl": e.link,
-                            "imageUrl": e.link + 'media/?size=m',
+                            "imageUrl": e.images.standard_resolution.url,
                             "videoId": null
                         }
                         instaJson.push(a);

@@ -10,7 +10,9 @@ var youtube = require('./src/social-api/yt');
 var facebook = require('./src/social-api/fb');
 var twitter = require('./src/social-api/twitterApi');
 var twSocialCards = require('./src/social-api/socialCardsTwitter');
+var twCourseCards = require('./src/social-api/courseCardTwitter');
 var sendSocialCards = require('./src/methods/cardsSOAP');
+var sendCourseSocialCards = require('./src/methods/cityCourseSOAP');
 var saveJson = require('./src/methods/saveJSON');
 
 
@@ -72,5 +74,14 @@ cron.schedule('4 */1 * * *', function() {
 
 cron.schedule('5 */1 * * *', function() {
     sendSocialCards.sendSocialCards().then(r =>
+        console.log(r));
+});
+
+cron.schedule('6 */1 * * *', function() {
+    twCourseCards.socialCards();
+});
+
+cron.schedule('7 */1 * * *', function() {
+    sendCourseSocialCards.sendCityCourse().then(r =>
         console.log(r));
 });
