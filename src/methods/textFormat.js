@@ -1,5 +1,13 @@
 const compose = require('lodash/fp/compose');
 
+const urlDecode = function(string){
+	return decodeURI(string)
+}
+
+const escapeSingleQuote  = function(string){
+	return string.replace(/[']/g, '&#39;')
+}
+
 const hashTag = function(string){
 	return string.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://twitter.com/hashtag/$2?src=hash\">#$2</a>')
 }
@@ -36,6 +44,8 @@ const twitterTextFormatter = compose(
 	hashTag,
 	emailSign,
 	linksToHTMLLink,
+	escapeSingleQuote,
+	urlDecode,
 	);
 
 const facebookTextFormatter = compose(

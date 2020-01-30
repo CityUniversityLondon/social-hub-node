@@ -23,7 +23,7 @@ exports.getFacebook = function() {
             })
             .then(function(json) {
                 if (json.error) {
-                    console.log(json.error.message);
+                    console.log(account.account + ': ' + json.error.message);
                 }
                 else{
                     json.data.forEach(e => {

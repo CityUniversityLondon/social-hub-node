@@ -25,6 +25,13 @@ async function sendCityCourse (){
         return e.type === 'Facebook' && e.screenName === 'EngineeringCityUniversityLondon'
     });
 
+    if(engineer !== undefined){
+        engineer.itemRef = 'fb-EngineeringCityUniversityLondon';
+    }
+    else{
+        engineer = {};  
+    }
+
     ar.push(engineer);
 
 
