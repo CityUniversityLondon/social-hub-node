@@ -27,12 +27,8 @@ async function sendCityCourse (){
 
     if(engineer !== undefined){
         engineer.itemRef = 'fb-EngineeringCityUniversityLondon';
-    }
-    else{
-        engineer = {};  
-    }
-
-    ar.push(engineer);
+        ar.push(engineer);
+    } 
 
 
     let objJsonStr = JSON.stringify(ar);
