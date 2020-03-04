@@ -4,6 +4,10 @@ const urlDecode = function(string){
 	return decodeURI(string)
 }
 
+const urlEncode = function(string){
+	return encodeURI(string)
+}
+
 const escapeSingleQuote  = function(string){
 	return string.replace(/[']/g, '&#39;')
 }
@@ -46,6 +50,7 @@ const twitterTextFormatter = compose(
 	linksToHTMLLink,
 	escapeSingleQuote,
 	urlDecode,
+	urlEncode,
 	);
 
 const facebookTextFormatter = compose(
