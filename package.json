@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "async": "^2.6.3",
+    "axios": "^0.19.2",
     "bfj": "^6.1.2",
     "chokidar": "^2.1.8",
     "easy-soap-request": "^2.6.0",

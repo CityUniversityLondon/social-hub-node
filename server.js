@@ -5,6 +5,7 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 /*var memwatch = require('memwatch-next');*/
 
+var instMedia = require('./src/social-api/instaGetMediaID');
 var inst = require('./src/social-api/insta');
 var youtube = require('./src/social-api/yt');
 var facebook = require('./src/social-api/fb');
@@ -12,6 +13,7 @@ var twitter = require('./src/social-api/twitterApi');
 var twSocialCards = require('./src/social-api/socialCardsTwitter');
 var twCourseCards = require('./src/social-api/courseCardTwitter');
 var sendSocialCards = require('./src/methods/cardsSOAP');
+const rrenewInstaToken = require('./src/methods/renewInstaTokens');
 var sendCourseSocialCards = require('./src/methods/cityCourseSOAP');
 var saveJson = require('./src/methods/saveJSON');
 
@@ -35,6 +37,16 @@ app.listen(3000, () => {
         console.log('error');
     })
 });*/
+
+//renew instagram tokens
+cron.schedule('0 0 * * *', function() {
+    rrenewInstaToken.renewInstaToken();
+});
+
+//generate instagram media json
+cron.schedule('30 */1 * * *', function() {
+    instMedia.getInstaMediaID();
+});
 
 cron.schedule('1 */1 * * *', function() {
     youtube.getYt();
