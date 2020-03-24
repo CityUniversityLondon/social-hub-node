@@ -21,7 +21,7 @@ async function sendCityCourse (){
         ar.push(e);
     });
 
-    var engineer = sl.find(function(e) {
+    let engineer = sl.find(function(e) {
         return e.type === 'Facebook' && e.screenName === 'EngineeringCityUniversityLondon'
     });
 
@@ -30,6 +30,25 @@ async function sendCityCourse (){
         ar.push(engineer);
     } 
 
+    let cityuniversitylondon = sl.find(function(e){
+        return e.type === 'Facebook' && e.screenName === 'cityuniversitylondon'
+    });
+
+    if(cityuniversitylondon !== undefined){
+        cityuniversitylondon.itemRef = 'fb-cityuniversitylondon';
+        ar.push(cityuniversitylondon);
+    }
+
+    let instaCityuniversitylondon = sl.find(function(e){
+        return e.type === 'Instagram' && e.screenName === 'cityuniversitylondon'
+    });
+
+    if(instaCityuniversitylondon !== undefined){
+        instaCityuniversitylondon.itemRef = 'in-cityuniversitylondon';
+        let f = instaCityuniversitylondon.linkedText;
+        instaCityuniversitylondon.linkedText = encodeURIComponent(f);
+        ar.push(instaCityuniversitylondon);
+    }
 
     let objJsonStr = JSON.stringify(ar);
     let objJsonB64 = Buffer.from(objJsonStr).toString("base64");

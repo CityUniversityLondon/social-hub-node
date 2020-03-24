@@ -1,11 +1,11 @@
 const compose = require('lodash/fp/compose');
 
 const urlDecode = function(string){
-	return decodeURI(string)
+	return decodeURIComponent(string)
 }
 
 const urlEncode = function(string){
-	return encodeURI(string)
+	return encodeURIComponent(string)
 }
 
 const escapeSingleQuote  = function(string){
@@ -58,10 +58,15 @@ const facebookTextFormatter = compose(
 	linksToHTMLLink,
 	);
 
+const instagramFormatter = compose(
+	instaHashTag,
+);
+
 module.exports = {
 	twitterTextFormatter: twitterTextFormatter,
-	instaHashTag: instaHashTag,
-	facebookTextFormatter: facebookTextFormatter
+	instagramFormatter: instagramFormatter,
+	facebookTextFormatter: facebookTextFormatter,
+	instaHashTag: instaHashTag
 }
 
 /*exports.twitterTextFormat = function(string){
