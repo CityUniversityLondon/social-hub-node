@@ -87,8 +87,8 @@ async function sendSocialCards() {
         '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://www.city.ac.uk/_web_services/socialmedia">' +
         '<SOAP-ENV:Body>' +
         '<ns1:Upload>' +
-        '<AssetID>446946</AssetID>' +
-        '<FileName>twitter.json</FileName>' +
+        '<AssetID>542618</AssetID>' +
+        '<FileName>cassSocialCards.json</FileName>' +
         '<FileContentBase64>' + objJsonB64 + '</FileContentBase64>' +
         '</ns1:Upload>' +
         '</SOAP-ENV:Body>' +
