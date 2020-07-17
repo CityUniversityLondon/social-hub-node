@@ -97,3 +97,5 @@ cron.schedule('7 */1 * * *', function() {
     sendCourseSocialCards.sendCityCourse().then(r =>
         console.log(r));
 });
+
+//test
