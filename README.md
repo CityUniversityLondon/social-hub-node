@@ -96,7 +96,7 @@ The URLs for managing our apps and clients are listed below. Their dashboards ha
 4. A pop-up box will appear. Authorize it for that Instagram user and client app.
 5. The URL in the browser will be redirected to something like  https://www.city.ac.uk/#access_token=xxxxxxx. Note down the value of the access_token parameter from the URL. This will need to be specified in our PHP application in order to access the Instagram API.
 * Further details on how to use the API are found at https://www.instagram.com/developer.
-* Instagram Legacy permission ("Basic Permission") was disabled on June 29, 2020 this has now been move over to Instagram Basic Display API and Instagram Graph API. via facebook developer.
+## Instagram Legacy permission ("Basic Permission") was disabled on June 29, 2020 this has now been move over to Instagram Basic Display API and Instagram Graph API. via facebook developer.
 * To add an instagram account first you need to add them to instagramMedia.json with their token. Follow this guide to obtain the token https://medium.com/@yasithlokuge/how-to-generate-a-never-expiring-facebook-page-access-token-24ac5c1a95f1
 You will need to get a long live access token by following step outline on https://developers.facebook.com/docs/instagram-basic-display-api/overview#instagram-user-access-tokens
 * Below are instructions to be sent to user to obtain their instagram api token
