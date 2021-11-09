@@ -21,6 +21,7 @@ exports.socialCards = function() {
         var params = { screen_name: a.account, count: 1, result_type: 'recent', include_rts: false };
 
         client.get('statuses/user_timeline', params, function(error, tweets, response) {
+
             if(tweets[0]){
                 var j = tweets[0] && tweets[0].entities && tweets[0].entities.media && tweets[0].entities.media[0].media_url;;
                 // if (tweets[0].entities.media !== undefined) {

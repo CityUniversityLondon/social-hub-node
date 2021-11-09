@@ -54,8 +54,8 @@ const twitterTextFormatter = compose(
 	);
 
 const facebookTextFormatter = compose(
-	fbHashTag,
-	linksToHTMLLink,
+	urlDecode,
+	urlEncode
 	);
 
 const instagramFormatter = compose(

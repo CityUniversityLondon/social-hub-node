@@ -61,6 +61,7 @@ exports.socialCards = function() {
             // if (tweets[0].entities.media !== undefined) {
             //     j = tweets[0].entities.media[0].media_url
             // }
+
             var t = {
                 'itemRef': 'tw-' + tweets[0].user.screen_name,
                 'postId': tweets[0].id,
@@ -73,7 +74,7 @@ exports.socialCards = function() {
                 'accountUrl': 'http:\/\/twitter.com\/' + tweets[0].user.screen_name,
                 'timeElapsed': moment(new Date(tweets[0].created_at)).fromNow(),
                 'itemUrl': 'https://twitter.com/' + tweets[0].user.screen_name + '/status/' + tweets[0].id_str,
-                'imageUrl': j,
+                'imageUrl': null,
                 'videoId': null
             }
             json.push(t);

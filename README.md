@@ -78,6 +78,7 @@ The URLs for managing our apps and clients are listed below. Their dashboards ha
 * LastPass: "socialhub - facebook account"
 * The specified App Token is required to access the API.
 * Further details on how to use the API are found at https://developers.facebook.com/docs/graph-api
+* Here guide https://medium.com/@yasithlokuge/how-to-generate-a-never-expiring-facebook-page-access-token-24ac5c1a95f1 that can  be sent to user to obtain their facebook api token
 
 ## 1.3 YouTube
 * Dashboard https://console.developers.google.com/apis/credentials?project=socialhub-208511
@@ -95,3 +96,12 @@ The URLs for managing our apps and clients are listed below. Their dashboards ha
 4. A pop-up box will appear. Authorize it for that Instagram user and client app.
 5. The URL in the browser will be redirected to something like  https://www.city.ac.uk/#access_token=xxxxxxx. Note down the value of the access_token parameter from the URL. This will need to be specified in our PHP application in order to access the Instagram API.
 * Further details on how to use the API are found at https://www.instagram.com/developer.
+## Instagram Legacy permission ("Basic Permission") was disabled on June 29, 2020 this has now been move over to Instagram Basic Display API and Instagram Graph API. via facebook developer.
+* To add an instagram account first you need to add them to instagramMedia.json with their token. Follow this guide to obtain the token https://medium.com/@yasithlokuge/how-to-generate-a-never-expiring-facebook-page-access-token-24ac5c1a95f1
+You will need to get a long live access token by following step outline on https://developers.facebook.com/docs/instagram-basic-display-api/overview#instagram-user-access-tokens
+* Below are instructions to be sent to user to obtain their instagram api token
+* Can you log in to Instagram and accept the tester invite.
+Invitations can be accepted by the Instagram User in the (Profile Icon) > Edit Profile > Apps and Websites > Tester Invites section of the Instagram website or mobile app after signing into their account.
+Then You will need to enter this URL. It will redirect you to city website with a code in the URL. Can you send that to me please
+e.g https://www.city.ac.uk/?code=AQCfeR6c_ebIpQfCzHRKf8Wy-dk-mwHRJTXlOt4uly1mrS87X0TWIzWreOSed2d94C4PBQoFeCa_AlfzpHTAtSjWSSq99Mwl6czyHSNE_yFiB2hiDk99LsijADKdKE2Kql3ny2gexlM9O3o_mXUwIg1QbL6egkjX2xy2mJvz6-lnaEkCFd8hCVoEum_6VmVxMCaPcDNnna61bJzHzDBq1V8vkBCqVDfgkVE6OXRJLQvLYQ#_
+https://api.instagram.com/oauth/authorize?client_id=213974163248293&redirect_uri=https://www.city.ac.uk/&scope=user_profile,user_media&response_type=code

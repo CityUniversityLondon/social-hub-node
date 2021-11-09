@@ -36,6 +36,8 @@ async function sendCityCourse (){
 
     if(cityuniversitylondon !== undefined){
         cityuniversitylondon.itemRef = 'fb-cityuniversitylondon';
+        let fbcity = cityuniversitylondon.linkedText;
+        cityuniversitylondon.linkedText = encodeURIComponent(fbcity);
         ar.push(cityuniversitylondon);
     }
 
@@ -57,8 +59,8 @@ async function sendCityCourse (){
         '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://www.city.ac.uk/_web_services/socialmedia">' +
         '<SOAP-ENV:Body>' +
         '<ns1:Upload>' +
-        '<AssetID>504211</AssetID>' +
-        '<FileName>courseSocialCards.json</FileName>' +
+        '<AssetID>542619</AssetID>' +
+        '<FileName>web2020SocialCards.json</FileName>' +
         '<FileContentBase64>' + objJsonB64 + '</FileContentBase64>' +
         '</ns1:Upload>' +
         '</SOAP-ENV:Body>' +

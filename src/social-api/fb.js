@@ -4,7 +4,7 @@ var moment = require('moment');
 var async = require("async");
 var accounts = require('../../accounts/accounts.json');
 var calDate = require('../methods/calDate');
-var {facebookTextFormatter} = require('../methods/textFormat');
+var { facebookTextFormatter } = require('../methods/textFormat');
 
 exports.getFacebook = function() {
     let ts = Math.round((new Date()).getTime() / 1000);
@@ -40,7 +40,7 @@ exports.getFacebook = function() {
                             'fullName': e.from.name,
                             'screenName': account.accountname,
                             'text': text,
-                            'linkedText': text,
+                            'linkedText': text, //leave un encode because of old social hub is using this Encode once in web2020
                             'accountUrl': 'http:\/\/www.facebook.com\/' + account.account,
                             'timeElapsed': moment(e.created_time * 1000).fromNow(),
                             'itemUrl': 'https://www.facebook.com/' + e.from.id + '/posts/' + postsId,
