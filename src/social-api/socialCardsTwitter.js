@@ -55,7 +55,13 @@ exports.socialCards = function() {
         var params = { screen_name: a.account, count: 1, result_type: 'recent', include_rts: false };
 
         client2.get('statuses/user_timeline', params, function(error, tweets, response) {
-            console.log(tweets[0].user);
+            
+            if(tweets[0]){
+                var j = tweets[0] && tweets[0].entities && tweets[0].entities.media && tweets[0].entities.media[0].media_url;
+            // if (tweets[0].entities.media !== undefined) {
+            //     j = tweets[0].entities.media[0].media_url
+            // }
+
             var t = {
                 'itemRef': 'tw-' + tweets[0].user.screen_name,
                 'postId': tweets[0].id,
@@ -72,6 +78,11 @@ exports.socialCards = function() {
                 'videoId': null
             }
             json.push(t);
+            }
+            else{
+                console.log('No tweets we are excluding retweets - ' + a.account);
+            }
+            
             callback();
         });
     }, err => {

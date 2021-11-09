@@ -65,14 +65,34 @@ async function sendSocialCards() {
     cassofficial.itemRef = 'fb-Cassofficial';
 
     var cassbusinessschool = sl.find(function(e) {
-        return e.type === 'Instagram' && e.screenName === 'cassbusinessschool'
+        return e.type === 'Instagram' && e.screenName === 'bayesbschool'
     });
 
-    cassbusinessschool.itemRef = 'in-cassbusinessschool';
+    if(cassbusinessschool !== undefined){
+        cassbusinessschool.itemRef = 'in-bayesbschool';
+        
+    }else{
+        cassbusinessschool = {
+            "itemRef": "in-bayesbschool",
+            "postId": "17922649177884469",
+            "timeCreated": "1632909643",
+            "type": "Instagram",
+            "fullName": "bayesbschool",
+            "screenName": "bayesbschool",
+            "text": "Being in the heart of the capital, student life at Bayes is never boring",
+            "linkedText": "Being in the heart of the capital, student life at Bayes is never boring",
+            "accountUrl": "https://instagram.com/bayesbschool",
+            "timeElapsed": "6 days ago",
+            "itemUrl": "https://www.instagram.com/p/CUZsNfVM5B2/",
+            "imageUrl": "https://www.bayes.city.ac.uk/__data/assets/image/0003/639831/bayes.jpeg",
+            "videoId": ""
+        };
+    }
 
     ar.push(cassofficial);
 
     ar.push(cassbusinessschool);
+    
 
     fs.writeFile('./json/socialCards.json', JSON.stringify(ar), 'utf-8', function(err) {
         if (err) throw err;
