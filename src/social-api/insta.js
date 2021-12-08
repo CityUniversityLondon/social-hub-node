@@ -30,7 +30,7 @@ exports.getInsta = function() {
                         "type": "Instagram",
                         "fullName": json.username,
                         "screenName": json.username,
-                        "text": json.caption,
+                        "text": encodeURIComponent(json.caption),
                         "linkedText": json.caption ? instaHashTag(json.caption) : null,
                         "accountUrl": "https:\/\/instagram.com\/" + json.username,
                         "timeElapsed": moment(json.timestamp).fromNow(),
