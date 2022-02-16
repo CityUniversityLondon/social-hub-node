@@ -70,14 +70,19 @@ cron.schedule('2 */1 * * *', function() {
 });
 
 cron.schedule('3 */1 * * *', function() {
-    var t = JSON.parse(fs.readFileSync('./json/all.json', 'utf8'));
-    var st = t.filter(e => e.type === 'Twitter');
+    const t = JSON.parse(fs.readFileSync('./json/all.json', 'utf8'));
+    const st = t.filter(e => e.type === 'Twitter');
+    const si = t.filter(e => e.type === 'Instagram');
 
     fs.writeFile('./json/twitterID.json', JSON.stringify(st), 'utf-8', function(err) {
         if (err) throw err;
         console.log('Twitter json with ID created!');
     });
 
+    fs.writeFile('./json/instagramID.json', JSON.stringify(si), 'utf-8', function(err) {
+        if (err) throw err;
+        console.log('Instagram json with ID created!');
+    });
 });
 
 cron.schedule('4 */1 * * *', function() {

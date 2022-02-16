@@ -101,3 +101,37 @@ exports.getTwitterHT = function(hashTag) {
 
     return n;
 }
+
+exports.getInstagram = async function() {
+    /*var tw = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
+    return tw.slice(0, 20);*/
+
+    var promise = new Promise((resolve, reject) => {
+        var instagramJson = fs.readFile('./json/instagramID.json', 'utf8', function(e, content) {
+            resolve(JSON.parse(content).slice(0, 20));
+        });
+    });
+
+    var results = await promise;
+
+    return results;
+}
+
+exports.getInstagramSN = async function(sName) {
+    /*var t = JSON.parse(fs.readFileSync('./json/twitterID.json', 'utf8'));
+    var sn = t.filter(e => e.screenName === sName);
+
+    return sn.slice(0, 20);*/
+
+    var promise = new Promise((resolve, reject) => {
+        var instagram = fs.readFile('./json/instagramID.json', 'utf8', function(e, content) {
+            var pj = JSON.parse(content);
+            var f = pj.filter(e => e.screenName === sName);
+            resolve(f.slice(0, 20));
+        });
+    });
+
+    var results = await promise;
+
+    return results;
+}
