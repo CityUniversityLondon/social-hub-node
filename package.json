@@ -30,7 +30,7 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "async": "^2.6.3",
+    "async": "^2.6.4",
     "axios": "^0.19.2",
     "bfj": "^6.1.2",
     "chokidar": "^2.1.8",
