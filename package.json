@@ -38,7 +38,7 @@
     "express": "^4.17.1",
     "invalidate-module": "^1.0.0",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
     "nodemailer": "^5.1.1",
