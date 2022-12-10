@@ -35,7 +35,7 @@
     "bfj": "^6.1.2",
     "chokidar": "^2.1.8",
     "easy-soap-request": "^2.6.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "invalidate-module": "^1.0.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
