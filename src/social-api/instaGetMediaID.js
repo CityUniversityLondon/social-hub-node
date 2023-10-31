@@ -28,6 +28,9 @@ exports.getInstaMediaID = function(){
                     return callback();
 			}
 		})
+		.catch(err => {
+			return callback(err);
+		})
 	}, err => {
         if (err) console.error(err.message);
 

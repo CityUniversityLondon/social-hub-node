@@ -3,10 +3,9 @@ var fs = require('fs');
 async function saveJson() {
     let promise = new Promise((resolve, reject) => {
         var instJs = JSON.parse(fs.readFileSync('./json/instagram.json', 'utf8'));
-        var twit = JSON.parse(fs.readFileSync('./json/twitter.json', 'utf8'));
         var yt = JSON.parse(fs.readFileSync('./json/youtube.json', 'utf8'));
         var fb = JSON.parse(fs.readFileSync('./json/facebook.json', 'utf8'));
-        var a = [...instJs, ...twit, ...yt, ...fb];
+        var a = [...instJs, ...yt, ...fb];
 
         /*Sort the json object by the date*/
 

@@ -14,13 +14,6 @@ async function sendCityCourse (){
     let sl = JSON.parse(xml);
     let ar = [];
 
-    let twCourseCards = fs.readFileSync('./json/twitterCourseCards.json', 'utf-8');
-    let prTw = JSON.parse(twCourseCards);
-
-    prTw.forEach(e => {
-        ar.push(e);
-    });
-
     let engineer = sl.find(function(e) {
         return e.type === 'Facebook' && e.screenName === 'EngineeringCityUniversityLondon'
     });

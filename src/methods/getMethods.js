@@ -135,3 +135,31 @@ exports.getInstagramSN = async function(sName) {
 
     return results;
 }
+
+exports.getFacebook = async function() {
+
+    var promise = new Promise((resolve, reject) => {
+        let facebookJson = fs.readFile('./json/facebookID.json', 'utf8', function(e, content) {
+            resolve(JSON.parse(content).slice(0, 20));
+        });
+    });
+
+    var results = await promise;
+
+    return results;
+}
+
+exports.getFacebookSN = async function(sName) {
+
+    let promise = new Promise((resolve, reject) => {
+        let facebook = fs.readFile('./json/facebookID.json', 'utf8', function(e, content) {
+            let pj = JSON.parse(content);
+            let f = pj.filter(e => e.screenName === sName);
+            resolve(f.slice(0, 20));
+        });
+    });
+
+    let results = await promise;
+
+    return results;
+}

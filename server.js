@@ -9,9 +9,6 @@ var instMedia = require('./src/social-api/instaGetMediaID');
 var inst = require('./src/social-api/insta');
 var youtube = require('./src/social-api/yt');
 var facebook = require('./src/social-api/fb');
-var twitter = require('./src/social-api/twitterApi');
-var twSocialCards = require('./src/social-api/socialCardsTwitter');
-var twCourseCards = require('./src/social-api/courseCardTwitter');
 var sendSocialCards = require('./src/methods/cardsSOAP');
 const rrenewInstaToken = require('./src/methods/renewInstaTokens');
 var sendCourseSocialCards = require('./src/methods/cityCourseSOAP');
@@ -60,10 +57,6 @@ cron.schedule('1 */1 * * *', function() {
     inst.getInsta();
 });
 
-cron.schedule('1 */1 * * *', function() {
-    twitter.getTwitter();
-});
-
 cron.schedule('2 */1 * * *', function() {
     saveJson.saveJson().then(r =>
         console.log(r));
@@ -71,34 +64,26 @@ cron.schedule('2 */1 * * *', function() {
 
 cron.schedule('3 */1 * * *', function() {
     const t = JSON.parse(fs.readFileSync('./json/all.json', 'utf8'));
-    const st = t.filter(e => e.type === 'Twitter');
     const si = t.filter(e => e.type === 'Instagram');
-
-    fs.writeFile('./json/twitterID.json', JSON.stringify(st), 'utf-8', function(err) {
-        if (err) throw err;
-        console.log('Twitter json with ID created!');
-    });
+    const sf = t.filter(e => e.type === 'Facebook');
 
     fs.writeFile('./json/instagramID.json', JSON.stringify(si), 'utf-8', function(err) {
         if (err) throw err;
         console.log('Instagram json with ID created!');
     });
+
+    fs.writeFile('./json/facebookID.json', JSON.stringify(sf), 'utf-8', function(err) {
+        if (err) throw err;
+        console.log('facebook json with ID created!');
+    });
 });
 
 cron.schedule('4 */1 * * *', function() {
-    twSocialCards.socialCards();
-});
-
-cron.schedule('5 */1 * * *', function() {
     sendSocialCards.sendSocialCards().then(r =>
         console.log(r));
 });
 
-cron.schedule('6 */1 * * *', function() {
-    twCourseCards.socialCards();
-});
-
-cron.schedule('7 */1 * * *', function() {
+cron.schedule('5 */1 * * *', function() {
     sendCourseSocialCards.sendCityCourse().then(r =>
         console.log(r));
 });

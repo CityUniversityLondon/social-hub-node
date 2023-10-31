@@ -31,7 +31,7 @@ exports.getInsta = function() {
                         "fullName": json.username,
                         "screenName": json.username,
                         "text": encodeURIComponent(json.caption),
-                        "linkedText": json.caption ? instaHashTag(json.caption) : null,
+                        "linkedText": json.caption ? encodeURIComponent(instaHashTag(json.caption)) : null,
                         "accountUrl": "https:\/\/instagram.com\/" + json.username,
                         "timeElapsed": moment(json.timestamp).fromNow(),
                         "itemUrl": json.permalink,
@@ -45,6 +45,9 @@ exports.getInsta = function() {
                     console.log(account.account + ' :' + json.meta.error_message);
                     return callback();
                 }
+            })
+            .catch(err => {
+                return callback(err);
             });
     }, err => {
         if (err) console.error(err.message);
@@ -55,81 +58,3 @@ exports.getInsta = function() {
         });
     });
 }
-
-/*exports.instAccounts = accounts.accounts.instagram.map(function(account) {
-    return new Promise(function(resolve, reject) {
-        let ts = Math.round((new Date()).getTime() / 1000);
-        let onemonthTS = new Date();
-        onemonthTS.setMonth(onemonthTS.getMonth() - 1);
-        onemonthTS = Math.round(onemonthTS.getTime() / 1000);
-
-        fetch(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${account.token}&max_timestamp=${ts}&min_timestamp=${onemonthTS}`)
-            .then(function(j) {
-                return j.json()
-            })
-            .then(json => {
-                //Resolve the results even a error is return from the API because Promise all will terminate with one reject
-                // Remove the error nodes from the results after promise all
-                if (json.data) {
-                    var map = json.data.map(function(e) {
-                        return {
-                            "itemRef": calDate.formatDate(e.created_time * 1000),
-                            "postId": null,
-                            "timeCreated": e.created_time,
-                            "type": "Instagram",
-                            "fullName": e.user.full_name,
-                            "screenName": e.user.username,
-                            "text": e.caption.text,
-                            "linkedText": e.caption.text.replace(/(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g, '<a href=\"http://instagram.com/$2\">@$2</a>'),
-                            "accountUrl": "https:\/\/instagram.com\/" + e.user.username,
-                            "timeElapsed": moment(e.created_time * 1000).fromNow(),
-                            "itemUrl": e.link,
-                            "imageUrl": e.images.standard_resolution.url,
-                            "videoId": null
-                        }
-                    })
-                    resolve(map);
-                } else {
-                    console.log(account.account + ' :' + json.meta.error_message);
-                    resolve(json.meta)
-                }
-
-            })
-    }).then(function(j) {
-        return j
-    })
-
-    fetch(`https://graph.instagram.com/${account.token}/?access_token=${account.token}&fields=caption,id,media_type,media_url,permalink,thumbnail_url,timestamp,username`)
-            .then(function(j) {
-                return j.json()
-            })
-            .then(json => {
-                if (json.data) {
-                    json.data.forEach(function(e) {
-                        let txt = e.caption && e.caption.text;
-                        var a = {
-                            "itemRef": calDate.formatDate(e.created_time * 1000),
-                            "postId": null,
-                            "timeCreated": e.created_time,
-                            "type": "Instagram",
-                            "fullName": e.user.full_name,
-                            "screenName": e.user.username,
-                            "text": txt,
-                            "linkedText": txt ? instaHashTag(txt) : null,
-                            "accountUrl": "https:\/\/instagram.com\/" + e.user.username,
-                            "timeElapsed": moment(e.created_time * 1000).fromNow(),
-                            "itemUrl": e.link,
-                            "imageUrl": e.images.standard_resolution.url,
-                            "videoId": null
-                        }
-                        instaJson.push(a);
-                    });
-                    callback();
-                } else {
-                    //console log instaed of throwing an error as 
-                    //it will not carry on fetching
-                    console.log(account.account + ' :' + json.meta.error_message);
-                    return callback();
-                }
-            });
-})*/
