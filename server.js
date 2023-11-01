@@ -3,6 +3,7 @@ var express = require('express');
 var cron = require('node-cron');
 var fs = require('fs');
 var bodyParser = require('body-parser');
+const { exec } = require('child_process');
 /*var memwatch = require('memwatch-next');*/
 
 var instMedia = require('./src/social-api/instaGetMediaID');
@@ -14,6 +15,29 @@ const rrenewInstaToken = require('./src/methods/renewInstaTokens');
 var sendCourseSocialCards = require('./src/methods/cityCourseSOAP');
 var saveJson = require('./src/methods/saveJSON');
 
+
+const restartCommand = "pm2 restart 0";
+const listCommand = "pm2 list";
+
+function listApps() {
+    exec(listCommand, (err, stdout, stderr) => {
+      // handle err if you like!
+      console.log(`pm2 list`);
+      console.log(`${stdout}`);
+    });
+  }
+
+const restartApp = function () {
+    exec(restartCommand, (err, stdout, stderr) => {
+      if (!err && !stderr) {
+        console.log(new Date(), `App restarted!!!`);
+        listApps();
+      }
+      else if (err || stderr) {
+        console.log(new Date(), `Error in executing ${restartCommand}`, err || stderr);
+      }
+    });
+  }
 
 var all = JSON.parse(fs.readFileSync('./json/all.json', 'utf8'));
 
@@ -86,4 +110,9 @@ cron.schedule('4 */1 * * *', function() {
 cron.schedule('5 */1 * * *', function() {
     sendCourseSocialCards.sendCityCourse().then(r =>
         console.log(r));
+});
+
+cron.schedule('15 0 * * 1', function(){
+    console.log('Restarting Social hub every Monday');
+    restartApp();
 });
