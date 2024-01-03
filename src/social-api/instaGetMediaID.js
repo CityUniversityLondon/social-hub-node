@@ -24,15 +24,16 @@ exports.getInstaMediaID = function(){
 				callback();
 			}
 			else{
-				console.log(account.account + ' :' + json.meta.error_message);
+				console.log('then block' + account.account + ' :' + json.error);
                     return callback();
 			}
 		})
 		.catch(err => {
-			return callback(err);
-		})
+			console.log(err);
+			return callback();
+		});
 	}, err => {
-        if (err) console.error(err.message);
+        if (err) console.error('Err block' + err.message);
 
         fs.writeFile('./accounts/instagramMedia.json', JSON.stringify(insta), 'utf-8', function(err) {
             if (err) throw err;
